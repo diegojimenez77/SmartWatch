@@ -4,6 +4,33 @@
    Unidades: rem (base 10 px → html font-size: 62.5%)
    ========================================================= */
 
+/* ----- Variables de tema ------------------------------- */
+:root {
+  --c-bg:          #051614;
+  --c-fg:          #00ffc2;
+  --c-fg-rgb:      0, 255, 194;
+  --c-band:        #0d2b22;
+  --c-band-border: #1c4a38;
+  --c-casing:      #020a09;
+  --c-casing-ring: #111;
+  --c-bezel:       #010706;
+  --c-notif:       #0d2b22;
+  --c-drop-shadow: rgba(0, 0, 0, 0.8);
+}
+
+body.light-mode {
+  --c-bg:          #ecfdf6;
+  --c-fg:          #006644;
+  --c-fg-rgb:      0, 102, 68;
+  --c-band:        #bde8d6;
+  --c-band-border: #6cbfa3;
+  --c-casing:      #caeee1;
+  --c-casing-ring: #7cc4a9;
+  --c-bezel:       #d8f4eb;
+  --c-notif:       #bde8d6;
+  --c-drop-shadow: rgba(0, 60, 42, 0.18);
+}
+
 /* ----- Reset & base ------------------------------------ */
 *,
 *::before,
@@ -19,13 +46,14 @@ html {
 
 body {
   font-family: 'Public Sans', sans-serif;
-  background-color: #051614;
-  color: #00ffc2;
+  background-color: var(--c-bg);
+  color: var(--c-fg);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4rem 2rem;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ----- App --------------------------------------------- */
@@ -35,6 +63,76 @@ body {
   align-items: center;
   gap: 2.4rem;
   width: 100%;
+}
+
+/* =========================================================
+   BOTÓN DE TEMA (luna / sol)
+   ========================================================= */
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background-color: rgba(var(--c-fg-rgb), 0.08);
+  border: 0.15rem solid rgba(var(--c-fg-rgb), 0.25);
+  color: var(--c-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    transform 0.2s ease,
+    box-shadow 0.4s ease;
+  box-shadow: 0 0 1.2rem rgba(var(--c-fg-rgb), 0.12);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(var(--c-fg-rgb), 0.16);
+  transform: scale(1.1);
+  box-shadow: 0 0 2rem rgba(var(--c-fg-rgb), 0.25);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle:focus-visible {
+  outline: 0.15rem solid rgba(var(--c-fg-rgb), 0.6);
+  outline-offset: 0.3rem;
+}
+
+.theme-toggle__icon {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  position: absolute;
+}
+
+.theme-toggle__icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-toggle__icon--sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+body.light-mode .theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+body.light-mode .theme-toggle__icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 /* =========================================================
@@ -50,55 +148,59 @@ body {
 .smartwatch__band {
   width: 13rem;
   height: 0.9rem;
-  background-color: #0d2b22;
-  border-left: 0.1rem solid #1c4a38;
-  border-right: 0.1rem solid #1c4a38;
+  background-color: var(--c-band);
+  border-left: 0.1rem solid var(--c-band-border);
+  border-right: 0.1rem solid var(--c-band-border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .smartwatch__band--top {
-  border-top: 0.1rem solid #1c4a38;
+  border-top: 0.1rem solid var(--c-band-border);
   border-radius: 0.8rem 0.8rem 0 0;
 }
 
 .smartwatch__band--bottom {
-  border-bottom: 0.1rem solid #1c4a38;
+  border-bottom: 0.1rem solid var(--c-band-border);
   border-radius: 0 0 0.8rem 0.8rem;
 }
 
 /* ----- Carcasa exterior -------------------------------- */
 .smartwatch__casing {
-  background-color: #020a09;
+  background-color: var(--c-casing);
   border-radius: 6rem;
   padding: 1rem;
-  border: 0.2rem solid #111;
+  border: 0.2rem solid var(--c-casing-ring);
   box-shadow:
-    0 0 5rem rgba(0, 255, 194, 0.08),
-    0 2rem 6rem rgba(0, 0, 0, 0.8),
-    inset 0 0 2rem rgba(0, 255, 194, 0.03);
+    0 0 5rem rgba(var(--c-fg-rgb), 0.08),
+    0 2rem 6rem var(--c-drop-shadow),
+    inset 0 0 2rem rgba(var(--c-fg-rgb), 0.03);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* ----- Bisel interior ---------------------------------- */
 .smartwatch__bezel {
-  background-color: #010706;
+  background-color: var(--c-bezel);
   border-radius: 5.2rem;
   padding: 0.4rem;
-  border: 0.1rem solid rgba(0, 255, 194, 0.1);
+  border: 0.1rem solid rgba(var(--c-fg-rgb), 0.1);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 /* ----- Pantalla LCD ------------------------------------ */
 .smartwatch__screen {
-  background-color: #051614;
+  background-color: var(--c-bg);
   width: 32rem;
   border-radius: 4.6rem;
   padding: 2.6rem 2.4rem;
-  border: 0.1rem solid rgba(0, 255, 194, 0.2);
+  border: 0.1rem solid rgba(var(--c-fg-rgb), 0.2);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
   box-shadow:
-    0 0 3rem rgba(0, 255, 194, 0.04),
-    inset 0 0 1.5rem rgba(0, 255, 194, 0.03);
+    0 0 3rem rgba(var(--c-fg-rgb), 0.04),
+    inset 0 0 1.5rem rgba(var(--c-fg-rgb), 0.03);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Efecto scanlines sutil */
@@ -136,15 +238,15 @@ body {
 }
 
 .smartwatch__section--time:hover {
-  background-color: rgba(0, 255, 194, 0.03);
+  background-color: rgba(var(--c-fg-rgb), 0.03);
 }
 
 .smartwatch__section--time:active {
-  background-color: rgba(0, 255, 194, 0.07);
+  background-color: rgba(var(--c-fg-rgb), 0.07);
 }
 
 .smartwatch__section--time:focus-visible {
-  outline: 0.1rem solid rgba(0, 255, 194, 0.4);
+  outline: 0.1rem solid rgba(var(--c-fg-rgb), 0.4);
   outline-offset: 0.4rem;
 }
 
@@ -164,13 +266,15 @@ body {
   line-height: 1;
   letter-spacing: -0.02em;
   display: flex;
-  align-items: baseline;
-  text-shadow: 0 0 2rem rgba(0, 255, 194, 0.4);
+  align-items: flex-end;
+  text-shadow: 0 0 2rem rgba(var(--c-fg-rgb), 0.4);
 }
 
 .smartwatch__time-separator {
   margin: 0 0.2rem;
   opacity: 0.6;
+  line-height: 1;
+  padding-bottom: 0.05em;
 }
 
 .smartwatch__time-part--seconds {
@@ -185,8 +289,8 @@ body {
   letter-spacing: 0.05em;
   opacity: 0.75;
   margin-left: 0.8rem;
-  align-self: flex-start;
-  padding-top: 0.6rem;
+  align-self: flex-end;
+  padding-bottom: 0.3rem;
 }
 
 .smartwatch__time-ampm--oculto {
@@ -196,8 +300,8 @@ body {
 /* ----- Fecha ------------------------------------------- */
 .smartwatch__section--date {
   padding: 1.6rem 0;
-  border-top: 0.1rem solid rgba(0, 255, 194, 0.15);
-  border-bottom: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-top: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
+  border-bottom: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
 }
 
 .smartwatch__date-grid {
@@ -214,8 +318,8 @@ body {
 }
 
 .smartwatch__date-cell--center {
-  border-left: 0.1rem solid rgba(0, 255, 194, 0.15);
-  border-right: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-left: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
+  border-right: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
 }
 
 .smartwatch__date-label {
@@ -244,15 +348,15 @@ body {
 }
 
 .smartwatch__section--anim:hover {
-  background-color: rgba(0, 255, 194, 0.03);
+  background-color: rgba(var(--c-fg-rgb), 0.03);
 }
 
 .smartwatch__section--anim:active {
-  background-color: rgba(0, 255, 194, 0.07);
+  background-color: rgba(var(--c-fg-rgb), 0.07);
 }
 
 .smartwatch__section--anim:focus-visible {
-  outline: 0.1rem solid rgba(0, 255, 194, 0.4);
+  outline: 0.1rem solid rgba(var(--c-fg-rgb), 0.4);
   outline-offset: 0.4rem;
 }
 
@@ -287,25 +391,26 @@ body {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background-color: rgba(0, 255, 194, 0.22);
+  background-color: rgba(var(--c-fg-rgb), 0.22);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .smartwatch__anim-dot--activo {
-  background-color: #00ffc2;
+  background-color: var(--c-fg);
   transform: scale(1.4);
 }
 
 /* ----- Clima ------------------------------------------- */
 .smartwatch__section--weather {
   padding: 1.6rem 0 0.4rem;
-  border-top: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-top: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
 }
 
 .smartwatch__weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0;
+  align-items: start;
 }
 
 .smartwatch__weather-item {
@@ -313,6 +418,7 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   padding: 0 0.4rem;
+  min-width: 0;
 }
 
 .smartwatch__weather-item:first-child {
@@ -325,8 +431,8 @@ body {
 
 .smartwatch__weather-item--center {
   align-items: center;
-  border-left: 0.1rem solid rgba(0, 255, 194, 0.15);
-  border-right: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-left: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
+  border-right: 0.1rem solid rgba(var(--c-fg-rgb), 0.15);
 }
 
 .smartwatch__weather-item--right {
@@ -367,7 +473,9 @@ body {
   font-size: 2.8rem;
   font-weight: 700;
   line-height: 1;
-  text-shadow: 0 0 1.5rem rgba(0, 255, 194, 0.35);
+  text-shadow: 0 0 1.5rem rgba(var(--c-fg-rgb), 0.35);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .smartwatch__weather-value--center {
@@ -409,15 +517,19 @@ body {
    NOTIFICACIÓN
    ========================================================= */
 .notification {
-  background-color: #0d2b22;
-  border: 0.1rem solid rgba(0, 255, 194, 0.35);
+  background-color: var(--c-notif);
+  border: 0.1rem solid rgba(var(--c-fg-rgb), 0.35);
   border-radius: 1.2rem;
   padding: 1.2rem 2rem;
   max-width: 36rem;
   width: 100%;
   text-align: center;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  box-shadow: 0 0 2rem rgba(0, 255, 194, 0.08);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+  box-shadow: 0 0 2rem rgba(var(--c-fg-rgb), 0.08);
 }
 
 .notification--hidden {
@@ -485,5 +597,17 @@ body {
 @media (max-width: 30rem) {
   html {
     font-size: 55%;
+  }
+
+  .theme-toggle {
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .theme-toggle__icon {
+    width: 1.6rem;
+    height: 1.6rem;
   }
 }

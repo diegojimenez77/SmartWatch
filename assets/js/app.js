@@ -3,6 +3,7 @@
    ========================================================= */
 
 /* ----- Referencias al DOM -------------------------------- */
+const themeToggleEl  = document.getElementById('js-theme-toggle');
 const hoursEl        = document.getElementById('js-hours');
 const minutesEl      = document.getElementById('js-minutes');
 const secondsEl      = document.getElementById('js-seconds');
@@ -209,7 +210,38 @@ const animSeccionEl = document.getElementById('js-anim-section');
 const animNombreEl  = document.getElementById('js-anim-nombre');
 const animDotsEl    = document.getElementById('js-anim-dots');
 const ctx           = canvasEl.getContext('2d');
-const C             = '#00ffc2'; /* color base */
+let C               = '#00ffc2'; /* color base — se actualiza con el tema */
+
+/* =========================================================
+   TOGGLE DE TEMA (oscuro / claro)
+   ========================================================= */
+const COLOR_OSCURO = '#00ffc2';
+const COLOR_CLARO  = '#006644';
+
+let modoClaro = localStorage.getItem('smartwatch-tema') === 'claro';
+
+function aplicarTema(claro) {
+  modoClaro = claro;
+  C = claro ? COLOR_CLARO : COLOR_OSCURO;
+  document.body.classList.toggle('light-mode', claro);
+  themeToggleEl.setAttribute(
+    'aria-label',
+    claro ? 'Activar modo oscuro' : 'Activar modo claro'
+  );
+  localStorage.setItem('smartwatch-tema', claro ? 'claro' : 'oscuro');
+}
+
+function toggleTema() {
+  aplicarTema(!modoClaro);
+}
+
+themeToggleEl.addEventListener('click', toggleTema);
+themeToggleEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTema(); }
+});
+
+/* Aplica el tema guardado al cargar */
+if (modoClaro) aplicarTema(true);
 
 function ajustarCanvas() {
   canvasEl.width  = canvasEl.offsetWidth  || 270;
