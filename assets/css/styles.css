@@ -1,0 +1,433 @@
+/* =========================================================
+   SMARTWATCH – Hoja de estilos principal
+   Metodología: BEM estricto
+   Unidades: rem (base 10 px → html font-size: 62.5%)
+   ========================================================= */
+
+/* ----- Reset & base ------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%; /* 1 rem = 10 px */
+}
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  background-color: #051614;
+  color: #00ffc2;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+/* ----- App --------------------------------------------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+  width: 100%;
+}
+
+/* =========================================================
+   SMARTWATCH
+   ========================================================= */
+.smartwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----- Bandas ------------------------------------------ */
+.smartwatch__band {
+  width: 13rem;
+  height: 0.9rem;
+  background-color: #0d2b22;
+  border-left: 0.1rem solid #1c4a38;
+  border-right: 0.1rem solid #1c4a38;
+}
+
+.smartwatch__band--top {
+  border-top: 0.1rem solid #1c4a38;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+
+.smartwatch__band--bottom {
+  border-bottom: 0.1rem solid #1c4a38;
+  border-radius: 0 0 0.8rem 0.8rem;
+}
+
+/* ----- Carcasa exterior -------------------------------- */
+.smartwatch__casing {
+  background-color: #020a09;
+  border-radius: 6rem;
+  padding: 1rem;
+  border: 0.2rem solid #111;
+  box-shadow:
+    0 0 5rem rgba(0, 255, 194, 0.08),
+    0 2rem 6rem rgba(0, 0, 0, 0.8),
+    inset 0 0 2rem rgba(0, 255, 194, 0.03);
+}
+
+/* ----- Bisel interior ---------------------------------- */
+.smartwatch__bezel {
+  background-color: #010706;
+  border-radius: 5.2rem;
+  padding: 0.4rem;
+  border: 0.1rem solid rgba(0, 255, 194, 0.1);
+}
+
+/* ----- Pantalla LCD ------------------------------------ */
+.smartwatch__screen {
+  background-color: #051614;
+  width: 32rem;
+  border-radius: 4.6rem;
+  padding: 2.6rem 2.4rem;
+  border: 0.1rem solid rgba(0, 255, 194, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 3rem rgba(0, 255, 194, 0.04),
+    inset 0 0 1.5rem rgba(0, 255, 194, 0.03);
+}
+
+/* Efecto scanlines sutil */
+.smartwatch__screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 0.3rem,
+    rgba(0, 0, 0, 0.04) 0.3rem,
+    rgba(0, 0, 0, 0.04) 0.4rem
+  );
+  pointer-events: none;
+  border-radius: 4.6rem;
+  z-index: 10;
+}
+
+/* =========================================================
+   SECCIONES INTERNAS
+   ========================================================= */
+
+/* ----- Hora -------------------------------------------- */
+.smartwatch__section--time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1.6rem;
+}
+
+.smartwatch__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  opacity: 0.55;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.smartwatch__time {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 5.4rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  text-shadow: 0 0 2rem rgba(0, 255, 194, 0.4);
+}
+
+.smartwatch__time-separator {
+  margin: 0 0.2rem;
+  opacity: 0.6;
+}
+
+.smartwatch__time-part--seconds {
+  font-size: 4rem;
+  opacity: 0.85;
+}
+
+/* ----- Fecha ------------------------------------------- */
+.smartwatch__section--date {
+  padding: 1.6rem 0;
+  border-top: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-bottom: 0.1rem solid rgba(0, 255, 194, 0.15);
+}
+
+.smartwatch__date-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+}
+
+.smartwatch__date-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.smartwatch__date-cell--center {
+  border-left: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-right: 0.1rem solid rgba(0, 255, 194, 0.15);
+}
+
+.smartwatch__date-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.smartwatch__date-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ----- Sección de animaciones interactivas ------------- */
+.smartwatch__section--anim {
+  padding: 1.4rem 0 0.8rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 0.8rem;
+  transition: background-color 0.15s ease;
+}
+
+.smartwatch__section--anim:hover {
+  background-color: rgba(0, 255, 194, 0.03);
+}
+
+.smartwatch__section--anim:active {
+  background-color: rgba(0, 255, 194, 0.07);
+}
+
+.smartwatch__section--anim:focus-visible {
+  outline: 0.1rem solid rgba(0, 255, 194, 0.4);
+  outline-offset: 0.4rem;
+}
+
+.smartwatch__anim-canvas {
+  display: block;
+  width: 100%;
+  height: 6.5rem;
+}
+
+.smartwatch__anim-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.7rem;
+  opacity: 0.45;
+}
+
+.smartwatch__anim-nombre {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.smartwatch__anim-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.smartwatch__anim-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: rgba(0, 255, 194, 0.22);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.smartwatch__anim-dot--activo {
+  background-color: #00ffc2;
+  transform: scale(1.4);
+}
+
+/* ----- Clima ------------------------------------------- */
+.smartwatch__section--weather {
+  padding: 1.6rem 0 0.4rem;
+  border-top: 0.1rem solid rgba(0, 255, 194, 0.15);
+}
+
+.smartwatch__weather-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.smartwatch__weather-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.smartwatch__weather-item--right {
+  align-items: flex-end;
+}
+
+.smartwatch__weather-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.smartwatch__weather-header--right {
+  flex-direction: row-reverse;
+}
+
+.smartwatch__weather-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.smartwatch__weather-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+.smartwatch__weather-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 1.5rem rgba(0, 255, 194, 0.35);
+}
+
+.smartwatch__weather-value--right {
+  text-align: right;
+}
+
+/* ----- Pie de pantalla --------------------------------- */
+.smartwatch__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.8rem;
+  opacity: 0.3;
+}
+
+.smartwatch__footer-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.smartwatch__footer-sync {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.smartwatch__footer-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* =========================================================
+   NOTIFICACIÓN
+   ========================================================= */
+.notification {
+  background-color: #0d2b22;
+  border: 0.1rem solid rgba(0, 255, 194, 0.35);
+  border-radius: 1.2rem;
+  padding: 1.2rem 2rem;
+  max-width: 36rem;
+  width: 100%;
+  text-align: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  box-shadow: 0 0 2rem rgba(0, 255, 194, 0.08);
+}
+
+.notification--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+}
+
+.notification__message {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 42rem) {
+  .smartwatch__screen {
+    width: 29rem;
+    padding: 2.2rem 2rem;
+  }
+
+  .smartwatch__time {
+    font-size: 4.8rem;
+  }
+
+  .smartwatch__time-part--seconds {
+    font-size: 3.6rem;
+  }
+
+  .smartwatch__weather-value {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .smartwatch__screen {
+    width: 26rem;
+    padding: 2rem 1.8rem;
+  }
+
+  .smartwatch__time {
+    font-size: 4.2rem;
+  }
+
+  .smartwatch__time-part--seconds {
+    font-size: 3.2rem;
+  }
+
+  .smartwatch__weather-value {
+    font-size: 2.4rem;
+  }
+
+  .smartwatch__band {
+    width: 11rem;
+  }
+
+  .smartwatch__date-value {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  html {
+    font-size: 55%;
+  }
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smartwatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Public+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+
+      <div class="smartwatch">
+        <div class="smartwatch__band smartwatch__band--top"></div>
+
+        <div class="smartwatch__casing">
+          <div class="smartwatch__bezel">
+            <div class="smartwatch__screen">
+
+              <!-- Hora -->
+              <section class="smartwatch__section smartwatch__section--time">
+                <span class="smartwatch__label">Hora del Sistema</span>
+                <div class="smartwatch__time" aria-live="polite" aria-atomic="true">
+                  <span class="smartwatch__time-part" id="js-hours">00</span>
+                  <span class="smartwatch__time-separator">:</span>
+                  <span class="smartwatch__time-part" id="js-minutes">00</span>
+                  <span class="smartwatch__time-separator">:</span>
+                  <span class="smartwatch__time-part smartwatch__time-part--seconds" id="js-seconds">00</span>
+                </div>
+              </section>
+
+              <!-- Fecha -->
+              <section class="smartwatch__section smartwatch__section--date">
+                <div class="smartwatch__date-grid">
+                  <div class="smartwatch__date-cell">
+                    <span class="smartwatch__date-label">Mes</span>
+                    <span class="smartwatch__date-value" id="js-month">---</span>
+                  </div>
+                  <div class="smartwatch__date-cell smartwatch__date-cell--center">
+                    <span class="smartwatch__date-label">Día</span>
+                    <span class="smartwatch__date-value" id="js-day">--</span>
+                  </div>
+                  <div class="smartwatch__date-cell">
+                    <span class="smartwatch__date-label">Semana</span>
+                    <span class="smartwatch__date-value" id="js-weekday">---</span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Sección de animaciones interactivas -->
+              <section
+                class="smartwatch__section smartwatch__section--anim"
+                id="js-anim-section"
+                role="button"
+                tabindex="0"
+                aria-label="Clic para cambiar animación"
+              >
+                <canvas class="smartwatch__anim-canvas" id="js-anim-canvas"></canvas>
+                <div class="smartwatch__anim-footer">
+                  <span class="smartwatch__anim-nombre" id="js-anim-nombre"></span>
+                  <div class="smartwatch__anim-dots" id="js-anim-dots"></div>
+                </div>
+              </section>
+
+              <!-- Clima -->
+              <section class="smartwatch__section smartwatch__section--weather">
+                <div class="smartwatch__weather-grid">
+                  <div class="smartwatch__weather-item">
+                    <div class="smartwatch__weather-header">
+                      <svg
+                        class="smartwatch__weather-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                      </svg>
+                      <span class="smartwatch__weather-label">Temp. Amb.</span>
+                    </div>
+                    <span class="smartwatch__weather-value" id="js-temperature">--°C</span>
+                  </div>
+                  <div class="smartwatch__weather-item smartwatch__weather-item--right">
+                    <div class="smartwatch__weather-header smartwatch__weather-header--right">
+                      <span class="smartwatch__weather-label">Prob. Lluvia</span>
+                      <svg
+                        class="smartwatch__weather-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <line x1="16" y1="13" x2="16" y2="21" />
+                        <line x1="8" y1="13" x2="8" y2="21" />
+                        <line x1="12" y1="15" x2="12" y2="23" />
+                        <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
+                      </svg>
+                    </div>
+                    <span class="smartwatch__weather-value smartwatch__weather-value--right" id="js-rain">--%</span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Pie de pantalla -->
+              <footer class="smartwatch__footer">
+                <span class="smartwatch__footer-text">Estado: Activo</span>
+                <div class="smartwatch__footer-sync">
+                  <span class="smartwatch__footer-text" id="js-sync-text">Sincronizando…</span>
+                  <svg
+                    class="smartwatch__footer-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46
+                         A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31
+                         0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4
+                         12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"
+                    />
+                  </svg>
+                </div>
+              </footer>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="smartwatch__band smartwatch__band--bottom"></div>
+      </div>
+
+      <!-- Notificación (sin alerts) -->
+      <div class="notification notification--hidden" id="js-notification" role="status" aria-live="polite">
+        <p class="notification__message" id="js-notification-msg"></p>
+      </div>
+
+    </main>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

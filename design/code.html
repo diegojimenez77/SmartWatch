@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centralized Command Grid</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Public+Sans:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#051614",
+                      "indigo-green": "#0D2B22",
+                      "cyber-accent": "#00FFC2",
+                      "surface-dark": "#020A09"
+              },
+              "fontFamily": {
+                      "orbitron": ["Orbitron", "sans-serif"],
+                      "body": ["Public Sans", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --bg-color: #051614;
+            --accent-color: #00FFC2;
+            --surface-color: #0D2B22;
+        }
+        body {
+            @apply bg-background text-cyber-accent font-body flex justify-center items-center min-h-screen m-0 p-4;
+        }
+        .lcd-screen {
+            background-color: var(--bg-color);
+            width: 320px;
+            height: 440px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 255, 194, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 194, 0.05);
+        }
+        .orbitron-heavy {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+        .ekg-line {
+            stroke: var(--accent-color);
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.4;
+        }
+        .grid-line {
+            border-color: rgba(0, 255, 194, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body>
+<div class="relative bg-surface-dark p-6 border-2 border-zinc-900 rounded-[60px] shadow-2xl">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-2 bg-zinc-800 rounded-full"></div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-2 bg-zinc-800 rounded-full"></div>
+<div class="bg-black p-1 rounded-[42px] border border-zinc-800 shadow-[inset_0_0_20px_rgba(0,255,194,0.05)]">
+<div class="lcd-screen rounded-[36px] p-6">
+<div class="flex flex-col items-center justify-center mt-4 mb-2">
+<span class="text-[0.6rem] font-bold tracking-[0.4em] opacity-60 uppercase mb-2">System Time</span>
+<div class="orbitron-heavy text-[3.25rem] leading-none tracking-tight">14:38:52</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-4 border-y grid-line mt-4">
+<div class="text-center">
+<div class="text-[0.5rem] font-bold opacity-50 uppercase mb-1">Month</div>
+<div class="font-orbitron text-sm font-bold">OCTOBER</div>
+</div>
+<div class="text-center border-x grid-line">
+<div class="text-[0.5rem] font-bold opacity-50 uppercase mb-1">Day</div>
+<div class="font-orbitron text-sm font-bold">24</div>
+</div>
+<div class="text-center">
+<div class="text-[0.5rem] font-bold opacity-50 uppercase mb-1">Weekday</div>
+<div class="font-orbitron text-sm font-bold uppercase">THU</div>
+</div>
+</div>
+<div class="flex-grow flex items-center justify-center py-6">
+<svg class="w-full h-12 ekg-line" viewBox="0 0 200 40">
+<path d="M0 20 L40 20 L45 10 L50 30 L55 20 L80 20 L85 5 L90 35 L95 20 L130 20 L135 15 L140 25 L145 20 L200 20"></path>
+</svg>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-auto pt-6 border-t grid-line pb-4">
+<div class="flex flex-col items-start">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-xs">thermostat</span>
+<span class="text-[0.6rem] font-bold tracking-widest opacity-70 uppercase">Ambient Temp</span>
+</div>
+<div class="font-orbitron text-3xl font-bold">24°C</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[0.6rem] font-bold tracking-widest opacity-70 uppercase">Rain Prob</span>
+<span class="material-symbols-outlined text-xs">rainy</span>
+</div>
+<div class="font-orbitron text-3xl font-bold">12%</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center opacity-30 text-[0.5rem] font-bold tracking-widest uppercase">
+<span>Grid Status: Active</span>
+<div class="flex items-center gap-1">
+<span>Sync 100%</span>
+<span class="material-symbols-outlined text-[10px]">bolt</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>
