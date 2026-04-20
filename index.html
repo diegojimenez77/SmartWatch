@@ -22,15 +22,22 @@
           <div class="smartwatch__bezel">
             <div class="smartwatch__screen">
 
-              <!-- Hora -->
-              <section class="smartwatch__section smartwatch__section--time">
-                <span class="smartwatch__label">Hora del Sistema</span>
+              <!-- Hora (clic para cambiar 24h / 12h) -->
+              <section
+                class="smartwatch__section smartwatch__section--time"
+                id="js-time-section"
+                role="button"
+                tabindex="0"
+                aria-label="Clic para cambiar formato de hora"
+              >
+                <span class="smartwatch__label" id="js-time-label">Hora del Sistema</span>
                 <div class="smartwatch__time" aria-live="polite" aria-atomic="true">
                   <span class="smartwatch__time-part" id="js-hours">00</span>
                   <span class="smartwatch__time-separator">:</span>
                   <span class="smartwatch__time-part" id="js-minutes">00</span>
                   <span class="smartwatch__time-separator">:</span>
                   <span class="smartwatch__time-part smartwatch__time-part--seconds" id="js-seconds">00</span>
+                  <span class="smartwatch__time-ampm smartwatch__time-ampm--oculto" id="js-ampm">AM</span>
                 </div>
               </section>
 
@@ -70,6 +77,8 @@
               <!-- Clima -->
               <section class="smartwatch__section smartwatch__section--weather">
                 <div class="smartwatch__weather-grid">
+
+                  <!-- Temperatura -->
                   <div class="smartwatch__weather-item">
                     <div class="smartwatch__weather-header">
                       <svg
@@ -84,13 +93,36 @@
                       >
                         <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                       </svg>
-                      <span class="smartwatch__weather-label">Temp. Amb.</span>
+                      <span class="smartwatch__weather-label">Temp.</span>
                     </div>
                     <span class="smartwatch__weather-value" id="js-temperature">--°C</span>
                   </div>
+
+                  <!-- País -->
+                  <div class="smartwatch__weather-item smartwatch__weather-item--center">
+                    <div class="smartwatch__weather-header smartwatch__weather-header--center">
+                      <svg
+                        class="smartwatch__weather-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                        <circle cx="12" cy="9" r="2.5" />
+                      </svg>
+                      <span class="smartwatch__weather-label">País</span>
+                    </div>
+                    <span class="smartwatch__weather-value smartwatch__weather-value--center" id="js-country">---</span>
+                  </div>
+
+                  <!-- Probabilidad de lluvia -->
                   <div class="smartwatch__weather-item smartwatch__weather-item--right">
                     <div class="smartwatch__weather-header smartwatch__weather-header--right">
-                      <span class="smartwatch__weather-label">Prob. Lluvia</span>
+                      <span class="smartwatch__weather-label">Lluvia</span>
                       <svg
                         class="smartwatch__weather-icon"
                         viewBox="0 0 24 24"
@@ -109,6 +141,7 @@
                     </div>
                     <span class="smartwatch__weather-value smartwatch__weather-value--right" id="js-rain">--%</span>
                   </div>
+
                 </div>
               </section>
 

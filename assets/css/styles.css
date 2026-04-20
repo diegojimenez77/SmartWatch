@@ -128,6 +128,24 @@ body {
   flex-direction: column;
   align-items: center;
   padding-bottom: 1.6rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 0.8rem;
+  transition: background-color 0.15s ease;
+}
+
+.smartwatch__section--time:hover {
+  background-color: rgba(0, 255, 194, 0.03);
+}
+
+.smartwatch__section--time:active {
+  background-color: rgba(0, 255, 194, 0.07);
+}
+
+.smartwatch__section--time:focus-visible {
+  outline: 0.1rem solid rgba(0, 255, 194, 0.4);
+  outline-offset: 0.4rem;
 }
 
 .smartwatch__label {
@@ -142,7 +160,7 @@ body {
 .smartwatch__time {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
-  font-size: 5.4rem;
+  font-size: 4.86rem;
   line-height: 1;
   letter-spacing: -0.02em;
   display: flex;
@@ -156,8 +174,23 @@ body {
 }
 
 .smartwatch__time-part--seconds {
-  font-size: 4rem;
+  font-size: 3.6rem;
   opacity: 0.85;
+}
+
+.smartwatch__time-ampm {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  opacity: 0.75;
+  margin-left: 0.8rem;
+  align-self: flex-start;
+  padding-top: 0.6rem;
+}
+
+.smartwatch__time-ampm--oculto {
+  display: none;
 }
 
 /* ----- Fecha ------------------------------------------- */
@@ -271,14 +304,29 @@ body {
 
 .smartwatch__weather-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
 }
 
 .smartwatch__weather-item {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 0 0.4rem;
+}
+
+.smartwatch__weather-item:first-child {
+  padding-left: 0;
+}
+
+.smartwatch__weather-item:last-child {
+  padding-right: 0;
+}
+
+.smartwatch__weather-item--center {
+  align-items: center;
+  border-left: 0.1rem solid rgba(0, 255, 194, 0.15);
+  border-right: 0.1rem solid rgba(0, 255, 194, 0.15);
 }
 
 .smartwatch__weather-item--right {
@@ -289,6 +337,10 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+.smartwatch__weather-header--center {
+  justify-content: center;
 }
 
 .smartwatch__weather-header--right {
@@ -312,10 +364,14 @@ body {
 
 .smartwatch__weather-value {
   font-family: 'Orbitron', sans-serif;
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 0 1.5rem rgba(0, 255, 194, 0.35);
+}
+
+.smartwatch__weather-value--center {
+  text-align: center;
 }
 
 .smartwatch__weather-value--right {
@@ -387,15 +443,15 @@ body {
   }
 
   .smartwatch__time {
-    font-size: 4.8rem;
+    font-size: 4.32rem;
   }
 
   .smartwatch__time-part--seconds {
-    font-size: 3.6rem;
+    font-size: 3.24rem;
   }
 
   .smartwatch__weather-value {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -406,15 +462,15 @@ body {
   }
 
   .smartwatch__time {
-    font-size: 4.2rem;
+    font-size: 3.78rem;
   }
 
   .smartwatch__time-part--seconds {
-    font-size: 3.2rem;
+    font-size: 2.88rem;
   }
 
   .smartwatch__weather-value {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .smartwatch__band {
